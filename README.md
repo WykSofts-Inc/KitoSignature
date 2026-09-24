@@ -127,6 +127,13 @@ light and dark mode.
 If your app also uses KitoOrderTracking, which has its own small `KitoSignaturePad` for delivery
 proof, write `KitoSignature.KitoSignaturePad` to pick this one.
 
+## Right-to-left
+
+Toolbars, fields and the form row mirror automatically, and the disclosure chevron follows the reading direction.
+Ink is never mirrored: strokes, photo marks and exported images keep the exact shape the person drew, in every layout.
+The sketch eraser cursor stays under the finger and the consent tick keeps its usual shape in right-to-left layouts.
+Nothing extra is needed from the app.
+
 ## Migrating from 0.1
 
 0.2.0 makes the tick drawn inside the "I agree" checkbox private to the package. It used to be

@@ -172,6 +172,8 @@ public struct KitoConsentCheckbox: View {
                 .trim(from: 0, to: isOn ? 1 : 0)
                 .stroke(theme.colors.onPrimary, style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
                 .padding(6)
+                // A tick is not directional; keep it unmirrored in right-to-left layouts.
+                .environment(\.layoutDirection, .leftToRight)
         }
         .frame(width: 24, height: 24)
         .scaleEffect(isOn ? 1 : 0.94)

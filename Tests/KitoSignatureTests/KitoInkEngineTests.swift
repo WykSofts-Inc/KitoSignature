@@ -39,15 +39,15 @@ final class KitoPenStyleTests: XCTestCase {
 }
 
 final class KitoInkEngineTests: XCTestCase {
-    private func line(speed: Double, count: Int = 30) -> [KitoSignaturePoint] {
-        // Points 5 pt apart; time between them sets the speed.
-        (0..<count).map { KitoSignaturePoint(x: Double($0) * 5, y: 0, t: Double($0) * 5 / speed) }
+    private func line(speed: Double, count: Int = 30, spacing: Double = 5) -> [KitoSignaturePoint] {
+        // Points `spacing` apart; the time between them sets the speed.
+        (0..<count).map { KitoSignaturePoint(x: Double($0) * spacing, y: 0, t: Double($0) * spacing / speed) }
     }
 
     func testSlowStrokesAreThickerThanFastOnes() throws {
         let pen = KitoPenStyle.fountain
         let slow = try XCTUnwrap(KitoInkEngine.widths(for: line(speed: 40), pen: pen).last)
-        let fast = try XCTUnwrap(KitoInkEngine.widths(for: line(speed: 3_000), pen: pen).last)
+        let fast = try XCTUnwrap(KitoInkEngine.widths(for: line(speed: 3_000, spacing: 20), pen: pen).last)
         XCTAssertGreaterThan(slow, fast)
         XCTAssertEqual(slow, pen.maxWidth, accuracy: 0.05)
         XCTAssertEqual(fast, pen.minWidth, accuracy: 0.05)

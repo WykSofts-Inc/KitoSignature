@@ -173,10 +173,11 @@ final class KitoSignatureModelTests: XCTestCase {
     func testValidationAndLoad() {
         let model = KitoSignatureModel()
         XCTAssertEqual(model.validation, .empty)
-        model.load(Fixtures.signature)
+        let saved = Fixtures.signature
+        model.load(saved)
         XCTAssertTrue(model.isValid)
         XCTAssertFalse(model.canUndo)
-        XCTAssertEqual(model.data.strokes, Fixtures.signature.strokes)
+        XCTAssertEqual(model.data.strokes, saved.strokes)
     }
 }
 

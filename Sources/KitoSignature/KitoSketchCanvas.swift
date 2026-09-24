@@ -48,6 +48,7 @@ public struct KitoSketchCanvas: View {
 
     @Environment(\.kitoTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.layoutDirection) private var layoutDirection
     @State private var background: KitoCanvasBackground
     @State private var tool: Tool = .pen
     @State private var eraserLocation: CGPoint?
@@ -69,7 +70,7 @@ public struct KitoSketchCanvas: View {
             ZStack {
                 KitoCanvasBackgroundView(background)
                 inkLayer
-                eraserCursor
+                eraserCursor(width: proxy.size.width)
             }
             .contentShape(Rectangle())
             .gesture(gesture)
@@ -101,14 +102,17 @@ public struct KitoSketchCanvas: View {
         .accessibilityHidden(true)
     }
 
+    /// Touches and ink are physical (left-to-right), but `.position` mirrors in right-to-left
+    /// layouts, so the cursor's x is flipped back to sit under the finger.
     @ViewBuilder
-    private var eraserCursor: some View {
+    private func eraserCursor(width: CGFloat) -> some View {
         if let eraserLocation {
+            let x = layoutDirection == .rightToLeft ? width - eraserLocation.x : eraserLocation.x
             Circle()
                 .strokeBorder(theme.colors.onSurface.opacity(0.5), lineWidth: 1.5)
                 .background(Circle().fill(theme.colors.surface.opacity(0.4)))
                 .frame(width: 28, height: 28)
-                .position(eraserLocation)
+                .position(x: x, y: eraserLocation.y)
                 .allowsHitTesting(false)
         }
     }

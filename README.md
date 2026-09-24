@@ -125,10 +125,17 @@ light and dark mode.
 If your app also uses KitoOrderTracking, which has its own small `KitoSignaturePad` for delivery
 proof, write `KitoSignature.KitoSignaturePad` to pick this one.
 
+## Migrating from 0.1
+
+0.2.0 makes the tick drawn inside the "I agree" checkbox private to the package. It used to be
+exported as `KitoCheckmarkShape`, which clashed with the shape of the same name in KitoButtons, so
+a file importing both packages got "ambiguous" errors. If you drew that tick yourself, use
+KitoButtons' `KitoCheckmarkShape` or your own `Shape`; nothing else changed.
+
 ## Installation
 
 ```swift
-.package(url: "https://github.com/WykSofts-Inc/KitoSignature.git", from: "0.1.0")
+.package(url: "https://github.com/WykSofts-Inc/KitoSignature.git", from: "0.2.0")
 ```
 
 ## License

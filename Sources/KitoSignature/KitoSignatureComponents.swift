@@ -168,7 +168,7 @@ public struct KitoConsentCheckbox: View {
                 .fill(isOn ? accent : theme.colors.surface)
             RoundedRectangle(cornerRadius: 7, style: .continuous)
                 .strokeBorder(isOn ? accent : theme.colors.border, lineWidth: 1.5)
-            KitoCheckmarkShape()
+            KitoSignatureCheckmark()
                 .trim(from: 0, to: isOn ? 1 : 0)
                 .stroke(theme.colors.onPrimary, style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
                 .padding(6)
@@ -179,10 +179,8 @@ public struct KitoConsentCheckbox: View {
 }
 
 /// A tick, drawn left to right so `trim` animates it like a pen.
-public struct KitoCheckmarkShape: Shape {
-    public init() {}
-
-    public func path(in rect: CGRect) -> Path {
+struct KitoSignatureCheckmark: Shape {
+    func path(in rect: CGRect) -> Path {
         var path = Path()
         path.move(to: CGPoint(x: rect.minX, y: rect.midY + rect.height * 0.05))
         path.addLine(to: CGPoint(x: rect.minX + rect.width * 0.36, y: rect.maxY - rect.height * 0.08))

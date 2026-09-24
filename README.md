@@ -1,5 +1,7 @@
 # KitoSignature
 
+**[Documentation](https://wyksofts-inc.github.io/KitoSignature/documentation/kitosignature/)**
+
 Signing and drawing for SwiftUI: a signature pad that writes like a pen, typed signatures in
 handwriting styles, a bottom-sheet signing flow with consent, a form field, a PencilKit canvas with
 paper backgrounds, a pure-SwiftUI sketch canvas, and photo markup. Signatures store as `Codable`
